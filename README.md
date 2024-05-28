@@ -1,2 +1,2 @@
-# CONVERSA
-This in main final year Chat Application project 
+# TEST-CONVERSA
+This is test repository for conversa
