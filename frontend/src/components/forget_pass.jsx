@@ -45,7 +45,7 @@ function ForgetPassword() {
         try {
             set_error_msg('');
             set_succ_msg('')            
-            const response = await axios.post(`http://${process.env.REACT_APP_IPADDRESS}:5000/api/forgot-pass/link`, formData);
+            const response = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/forgot-pass/link`, formData);
             set_succ_msg(response.data.ans)
             console.log('response => ',response);
 

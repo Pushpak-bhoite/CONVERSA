@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 function mydb(){
-    const mongoose_url=process.env.REACT_APP_DATABASE_LINK;
+    const mongoose_url=process.env.DATABASE_LINK;
     mongoose.connect(mongoose_url)
 .then(()=>{
     console.log("connection established")

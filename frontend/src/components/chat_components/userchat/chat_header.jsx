@@ -99,10 +99,10 @@ function Chat_Header(props) {
       this_user_id = props.item._id;
       let profile_img;
       if (props.item.chat_img) {
-        profile_img = `http://${process.env.REACT_APP_IPADDRESS}:5000/uploads/` + props.item._id + "/" + props.item.chat_img
+        profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/` + props.item._id + "/" + props.item.chat_img
       }
       else {
-        profile_img = `http://${process.env.REACT_APP_IPADDRESS}:5000/uploads/avatar.jpg`
+        profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/avatar.jpg`
       }
       return (
         <div className="chat-head" style={{fontFamily:Font}}>
@@ -184,7 +184,7 @@ function Chat_Header(props) {
                            return <li>
                             <div className="row">
                               <div className="col-4">
-                                <img src={`http://${process.env.REACT_APP_IPADDRESS}:5000/uploads/` + item._id + "/" + item.profile_img} height={"50px"} width={"50px"} />
+                                <img src={`${process.env.REACT_APP_IPADDRESS}/uploads/` + item._id + "/" + item.profile_img} height={"50px"} width={"50px"} />
                               </div>
                               <div className="col-8 text-center">{item.name}</div>
                             </div>
@@ -284,10 +284,10 @@ function Chat_Header(props) {
       this_user_id = props.item._id;
       let profile_img;
       if (props.item.profile_img) {
-        profile_img = `http://${process.env.REACT_APP_IPADDRESS}:5000/uploads/` + props.item._id + "/" + props.item.profile_img
+        profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/` + props.item._id + "/" + props.item.profile_img
       }
       else {
-        profile_img = `http://${process.env.REACT_APP_IPADDRESS}:5000/uploads/avatar.jpg`
+        profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/avatar.jpg`
       }
       return (
         <div className="chat-head" style={{fontFamily:Font}}>

@@ -45,7 +45,7 @@ function SignUpPage() {
     }
 
     async function save_data(form_data){
-        const result=await  axios.post(`http://${process.env.REACT_APP_IPADDRESS}:5000/api/auth/signup`,{...form_data},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
+        const result=await  axios.post(`${process.env.REACT_APP_IPADDRESS}/api/auth/signup`,{...form_data},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
         if(result){
             navigate("/sign-in") ;
         }

@@ -48,7 +48,7 @@ function ResetPassword({dispatch}) {
         try {
             set_error_msg(''); 
             set_success_msg('')
-            const response = await axios.post(`http://${process.env.REACT_APP_IPADDRESS}:5000/api/forgot-pass/reset`, {
+            const response = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/forgot-pass/reset`, {
                 password: formData.password,
                 confirm_pass: formData.confirm_pass,
                 resetToken: resetToken // Include the reset token in the request body

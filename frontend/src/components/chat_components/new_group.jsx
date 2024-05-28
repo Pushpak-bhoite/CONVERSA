@@ -57,7 +57,7 @@ function NewGroup(){
     }
 
     async function save_data(form_data){
-        const result=await  axios.post(`http://${process.env.REACT_APP_IPADDRESS}:5000/api/newgroup/create`,{...form_data},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
+        const result=await  axios.post(`${process.env.REACT_APP_IPADDRESS}/api/newgroup/create`,{...form_data},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
         socket.emit("get_new_group_chat",result.data.new_chat)
     }
 
