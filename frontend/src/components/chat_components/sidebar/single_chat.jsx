@@ -79,7 +79,7 @@ export default function SingleChat(props) {
               <div className="avatar mr-3">
                 <img
                   src={profile_img}
-                  alt="chatuserimage"
+                  alt="Img"
                   className="avatar-50 "
                 />
                 {isOnline?<span className="avatar-status">
@@ -139,7 +139,7 @@ export default function SingleChat(props) {
               <div className="avatar mr-3">
                 <img
                   src={profile_img}
-                  alt="chatuserimage"
+                  alt="Img"
                   className="avatar-50 "
                 />
                 {/* {isOnline?<span className="avatar-status">
@@ -193,7 +193,7 @@ export default function SingleChat(props) {
               <div className="avatar mr-3">
                 <img
                   src={profile_img}
-                  alt="chatuserimage"
+                  alt="Img"
                   className="avatar-50 "
                 />
                 <span className="avatar-status">

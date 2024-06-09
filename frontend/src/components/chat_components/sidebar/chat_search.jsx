@@ -108,7 +108,7 @@ function Chat_Search(){
                             <div className="chat-profile mr-3">
                               <img
                                 src={image_dp}
-                                alt="chat-user"
+                                alt="Img"
                                 className="avatar-60 "
                               />
                             </div>
@@ -300,7 +300,7 @@ function Chat_Search(){
                                       <div className="form-group row align-items-center">
                                         <div className="col-md-12">
                                             <div className="profile-img-edit">
-                                                <img className="profile-pic rounded-circle" style={{height:"150px",width:"150px"}} src={image_dp} alt="profile-pic" />
+                                                <img className="profile-pic rounded-circle" style={{height:"150px",width:"150px"}} src={image_dp} alt="Img" />
                                                 <div className="p-image">
                                                 <i class="ri-pencil-line upload-button" onClick={openFileInput}></i>
                                                   <input class="file-upload" type="file" name="change_picture" accept="image/*"  ref={input_file_ref} onChange={(e)=>{btn_submit_ref.current.click()}}/>

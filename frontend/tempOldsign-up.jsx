@@ -36,13 +36,11 @@ function SignUpPage() {
     }, []); // Empty dependency array ensures this effect runs only once after the component mounts
 
 
-    let name,email,password,phone_no,username,gender,dob,type,country,profile_pic,cnf_password; 
+    let name,email,password,phone_no,username,gender,dob,type,country,profile_pic,cnf_password;
     function submit_signup(e){
         e.preventDefault();
         const formData = new FormData(e.target);
         const formDataObject = Object.fromEntries(formData.entries());
-        console.log('formDataObject-->)', formDataObject);
-
         save_data(formDataObject)
     }
 
@@ -123,7 +121,7 @@ function SignUpPage() {
 
                                         <div className="form-group">
                                             <label htmlFor="profilePhoto">Profile Photo</label>
-                                            <input type="file" className="form-control-file" id="profilePhoto" accept="image/*" name="profile_pic" ref={node=>(profile_pic=node)}/>
+                                            <input type="file" className="form-control-file" id="profilePhoto" accept="image/*" name="profile_img" ref={node=>(profile_pic=node)}/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="usernameInput">Username</label>

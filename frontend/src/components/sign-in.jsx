@@ -91,7 +91,9 @@ function SignInPage({ dispatch }) {
                             <div className="col-sm-6 align-self-center">
                                 <div className="sign-in-from">
                                     <h1 className="mb-0 dark-signin">Sign in</h1>
-                                    <h3 className="text-danger text-center">{error_msg}</h3>
+                                    {error_msg && <div className="alert alert-danger">{error_msg}</div>}
+
+                                    {/* <h3 className="text-danger text-center">{error_msg}</h3> */}
                                     <p>Enter your email address and password to access admin panel.</p>
                                     <form className="mt-4">
                                         <div className="form-group">

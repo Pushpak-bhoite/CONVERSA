@@ -6,23 +6,49 @@
 
 .meetUserVideo {
     position: absolute;
-    bottom: 1.7vh;
+    bottom: 7vh;
     left: 0.8vw;;
-    height: 35vh;
-    width: auto;
+    /* height: 35vh; */
+    width: 50vh;
+    height: auto;
     border-radius: 3rem;
 }
 
 .buttonContainers {
     position: absolute;
     width: 100vw;
+    height: auto;
     bottom: 0;
     text-align: center;
 }
-
+/* ---------------------------------------- */
 .buttonContainers svg {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
+
+/* Media query for medium screens */
+@media only screen and (max-width: 1024px) {
+    .buttonContainers svg {
+        font-size: 2.3rem;
+    }
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 768px) {
+    .buttonContainers svg {
+        /* font-size: 2rem; */
+        font-size: 2rem;
+    }
+}
+
+/* Media query for extra small screens */
+@media only screen and (max-width: 480px) {
+    .buttonContainers svg {
+        font-size: 1.5rem;
+    }
+}
+
+/* ---------------------------------------- */
 
 .conferenceView { 
     display: flex;
@@ -37,7 +63,7 @@
 
 .conferenceView  video {
     /* width: 30vw; */
-    height: 40vh;
+    height: 50vh;
     /* min-width: 30vw; */
     /* border-radius: 20px; */
     border-radius: 1rem;

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocketContext } from "../../socket/socketConnection";
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function NewGroup(){
+    const navigate = useNavigate();
 
     const user_data=useSelector(state=>state.user_data)
     let {socket} = useSocketContext()
@@ -59,6 +62,8 @@ function NewGroup(){
     async function save_data(form_data){
         const result=await  axios.post(`${process.env.REACT_APP_IPADDRESS}/api/newgroup/create`,{...form_data},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
         socket.emit("get_new_group_chat",result.data.new_chat)
+        navigate("/");
+
     }
 
    
@@ -92,7 +97,7 @@ function NewGroup(){
                         <div className="d-flex align-items-center">
                             <div className="avatar mr-3">
                             <img
-                                src={"https://9w1r6qz3-5000.inc1.devtunnels.ms/uploads/"+item.users[1]._id+"/"+item.users[1].profile_img}
+                                src={`${process.env.REACT_APP_IPADDRESS}/uploads/`+item.users[1]._id+"/"+item.users[1].profile_img}
                                 alt="chatuserimage"
                                 className="avatar-50 "
                             />
@@ -110,7 +115,7 @@ function NewGroup(){
                             <div className="d-flex align-items-center">
                                 <div className="avatar mr-3">
                                 <img
-                                    src={"https://9w1r6qz3-5000.inc1.devtunnels.ms/uploads/"+item.users[0]._id+"/"+item.users[0].profile_img}
+                                    src={`${process.env.REACT_APP_IPADDRESS}/uploads/`+item.users[0]._id+"/"+item.users[0].profile_img}
                                     alt="chatuserimage"
                                     className="avatar-50 "
                                     />
@@ -145,7 +150,7 @@ function NewGroup(){
                             <div className="d-flex align-items-center">
                                 <div className="avatar mr-3">
                                 <img
-                                    src={"https://9w1r6qz3-5000.inc1.devtunnels.ms/uploads/"+item.users[1]?._id+"/"+item.users[1]?.profile_img}
+                                    src={`${process.env.REACT_APP_IPADDRESS}/uploads/`+item.users[1]?._id+"/"+item.users[1]?.profile_img}
                                     alt="chatuserimage"
                                     className="avatar-50 "
                                 />
@@ -163,7 +168,7 @@ function NewGroup(){
                                 <div className="d-flex align-items-center">
                                     <div className="avatar mr-3">
                                     <img
-                                        src={"https://9w1r6qz3-5000.inc1.devtunnels.ms/uploads/"+item.users[0]._id+"/"+item.users[0].profile_img}
+                                        src={`${process.env.REACT_APP_IPADDRESS}/uploads/`+item.users[0]._id+"/"+item.users[0].profile_img}
                                         alt="chatuserimage"
                                         className="avatar-50 "
                                     />
