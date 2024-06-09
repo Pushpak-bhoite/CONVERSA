@@ -29,8 +29,8 @@ function New_Message(props){
 
   const [files_to_send,setFilesToSend]=useState([])
   const [images_to_send,setImages]=useState([])
-
-  const preview_modal=useRef(null)
+   
+  const preview_modal=useRef(null)   
   const image_modal_close=useRef(null)
 
   async function send_files(e){
@@ -52,7 +52,7 @@ function New_Message(props){
 
   async function save_images(){
     const details={ids:{sent_by_user_id,sent_to_user_id},data:images_to_send,isGroupChat:isGroupChat}
-    const result_save_image=await axios.post('https://9w1r6qz3-5000.inc1.devtunnels.ms/api/saveImages/saveImages',{...details},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
+    const result_save_image=await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/saveImages/saveImages`,{...details},{headers: {'Content-Type': 'multipart/form-data','ngrok-skip-browser-warning': 'true'}});
     console.log(result_save_image)
     if(result_save_image.status===200){
       console.log("inside if is ok statsu is 200")

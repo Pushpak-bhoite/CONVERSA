@@ -72,8 +72,6 @@ function SignUpPage() {
                 }
             });
 
-
-
             if (result.status === 200) {
                 setSuccessMessage('Signup successful! Redirecting to login...');
                 setErrorMessage('');
