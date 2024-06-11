@@ -12,7 +12,6 @@ function Calls() {
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats);  // these are all chats which we have pushed below   
   const calls_data = useSelector(state => state.call_History );  // these are all chats which we have pushed below   
-  console.log('calls data -->)', calls_data)
   let [messages, setMessages] = useState("")
   let [chat_id, setChatID] = useState("")
 
@@ -58,7 +57,8 @@ function Calls() {
       return (
         <div className="chat-sidebar-channel scroller mt-4 pl-3">
           <ul className="iq-chat-ui nav flex-column nav-pills">
-            {calls_data.map((item) => { return <SingleCall item={item} user = { user_data } /> })}
+            {/* {calls_data.map((item) => { return <SingleCall item={item} user = { user_data } /> })} */}
+            {calls_data.reverse().map((item) => (<SingleCall item={item} user={user_data} />))}
           </ul>
         </div>
       );

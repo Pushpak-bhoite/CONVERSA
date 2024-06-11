@@ -45,18 +45,32 @@ const reduce = (state = initial_state, action) => {
             const msgs = []
             let chat_id;
             let new_unseen_chats = 0;
+
+            // console.log(' action.chat_id -->',action.chat_id)
+            // console.log('action.set_messages -->', action.set_messages)
+
             if (action.chat_id) {
                 chat_id = action.chat_id
             }
             else if (action.set_messages.chat_id) {
                 chat_id = action.set_messages.chat_id
             }
+            // console.log('state.messages[chat_id] -->)', state.messages[chat_id])
+            // console.log('action.set_messages -->)', action.set_messages)
+
             if (Array.isArray(state.messages[chat_id]) && !Array.isArray(action.set_messages)) {
                 state.messages[chat_id].forEach((msg) => {
                     msgs.push(msg)
                 })
-                console.log(action.set_messages.sender?._id)
-                new_unseen_chats = action.set_messages?._id !== state.user_data._id ? state.unseen_chats[chat_id] + 1 : state.unseen_chats[chat_id];
+
+                // console.log('action.set_messages?._id -->) ', action.set_messages?._id)
+                // console.log('state.user_data -->) ', state.user_data)
+                // console.log('state.messages[chat_id] ', state.messages[chat_id])
+                // console.log('state.unseen_chats ', state.unseen_chats)
+                // console.log('state.unseen_chats[chat_id] ', state.unseen_chats[chat_id])
+
+                // new_unseen_chats = action.set_messages?._id !== state.user_data._id ? state.unseen_chats[chat_id] + 1 : state.unseen_chats[chat_id];
+                new_unseen_chats = action.set_messages.sender?._id !== state.user_data._id ? state.unseen_chats[chat_id] + 1 : state.unseen_chats[chat_id];
                 msgs.push(action.set_messages)
                 return { ...state, messages: { ...state.messages, [chat_id]: msgs }, unseen_chats: { ...state.unseen_chats, [chat_id]: new_unseen_chats } }
             }

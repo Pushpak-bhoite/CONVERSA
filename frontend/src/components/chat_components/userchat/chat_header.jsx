@@ -7,7 +7,7 @@ import tune from "../../video_components/audio/tune.mp3";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 from uuid
 import { FontFamily } from "../../../utils/fonts";
-import { Country,State,City } from "country-state-city";
+import { Country, State, City } from "country-state-city";
 
 
 function Chat_Header(props) {
@@ -29,7 +29,7 @@ function Chat_Header(props) {
   let sent_to_user_id = props.chat_user;
   let sent_by_user_id = props.login_user;
 
-  const {Font}=useContext(FontFamily);
+  const { Font } = useContext(FontFamily);
 
   // --------------- Auido call   -------------------------------
 
@@ -39,38 +39,43 @@ function Chat_Header(props) {
     navigate(video_url, { state: 'outgoing_video' })
     localRing.play()
 
-    let details={video_url,ids:{sent_by_user_id,sent_to_user_id}, Local_U_data}
+
+    let details = { video_url, ids: { sent_by_user_id, sent_to_user_id }, Local_U_data }
 
     if (isGroupChat === "") {
-      socket.emit("make_audio_request",details)
-      
-    }else{
-      socket.emit("make_group_audio",details)
+      socket.emit("make_audio_request", details)
+
+    } else {
+      socket.emit("make_group_audio", details)
     }
   }
-// -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
   const make_video_call = () => {
     navigate(video_url, { state: 'outgoing_video' })
     localRing.play()
 
-    let details={video_url,ids:{sent_by_user_id,sent_to_user_id}, Local_U_data}
+    let details = { video_url, ids: { sent_by_user_id, sent_to_user_id }, Local_U_data }
 
     if (isGroupChat === "") {
-      socket.emit("make_video_request",details)
+      socket.emit("make_video_request", details)
       // const data ={ids:{sent_by_user_id,sent_to_user_id},msg:"🎥 𝗩𝗶𝗱𝗲𝗼 𝗰𝗮𝗹𝗹 (No answer)"}
       // socket.emit("send_message",data);
-    }else{
-      socket.emit("make_group_video",details)
+    } else {
+      socket.emit("make_group_video", details)
     }
   }
 
   // ------------- Incomming Request  --------------------
   function incommingVideoCallRequest(video_url, Local_U_data) {
-    console.log('Local_U_data ---> ', Local_U_data)
     navigate(video_url, { state: Local_U_data });
     remoteTune.play()
-      .then(() => console.log('Audio playback started.'))
+      .then(() => {
+        console.log('Hahhha Audio playing  started !!!!')
+        
+      })
       .catch((error) => console.error('Error playing audio:', error));
+
+      
   }
 
   // ------------------- stop Remote audio --------------------
@@ -105,7 +110,7 @@ function Chat_Header(props) {
         profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/avatar.jpg`
       }
       return (
-        <div className="chat-head" style={{fontFamily:Font}}>
+        <div className="chat-head" style={{ fontFamily: Font }}>
           <header className="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3">
             <div className="d-flex align-items-center">
               <div
@@ -124,12 +129,12 @@ function Chat_Header(props) {
                                     <i className="ri-checkbox-blank-circle-fill text-success" />
                                   </span> */}
               </div>
-              <div className="d-flex flex-column" style={{fontFamily:Font}}>
-                <h5 className="mb-0" style={{fontFamily:Font}}>{props.item.group_name}</h5>
+              <div className="d-flex flex-column" style={{ fontFamily: Font }}>
+                <h5 className="mb-0" style={{ fontFamily: Font }}>{props.item.group_name}</h5>
               </div>
 
             </div>
-            <div className="chat-user-detail-popup scroller" style={{fontFamily:Font}}>
+            <div className="chat-user-detail-popup scroller" style={{ fontFamily: Font }}>
               <div className="user-profile text-center">
                 <button
                   type="submit"
@@ -146,22 +151,22 @@ function Chat_Header(props) {
                       width={"125px"}
                     />
                   </a>
-                  <div className="user-name mt-4" style={{fontFamily:Font}}>
-                    <h4 style={{fontFamily:Font}}>{props.item.group_name}</h4>
+                  <div className="user-name mt-4" style={{ fontFamily: Font }}>
+                    <h4 style={{ fontFamily: Font }}>{props.item.group_name}</h4>
                   </div>
-                  <div className="user-desc" style={{fontFamily:Font}}>
+                  <div className="user-desc" style={{ fontFamily: Font }}>
                     <p>Cape Town, RSA</p>
                   </div>
                 </div>
                 <hr />
-                <div className="chatuser-detail text-left mt-4" style={{fontFamily:Font}}>
-                 
+                <div className="chatuser-detail text-left mt-4" style={{ fontFamily: Font }}>
+
                   <div className="row">
                     <div className="col-6 col-md-6 title">
                       Date Of Creation:
                     </div>
                     <div className="col-6 col-md-6 text-right">
-                      {months[new Date(props.item.createdAt).getMonth()]+" "+new Date(props.item.createdAt).getDate()+ ", " + new Date(props.item.createdAt).getFullYear()}
+                      {months[new Date(props.item.createdAt).getMonth()] + " " + new Date(props.item.createdAt).getDate() + ", " + new Date(props.item.createdAt).getFullYear()}
                     </div>
                   </div>
                   <hr />
@@ -178,20 +183,20 @@ function Chat_Header(props) {
                     <div className="col-12 col-md-12 title pb-4">
                       Participants
                     </div>
-                    <div className="col-12 col-md-12 pb-5" style={{overflowY:"auto",height:"250px"}}>
+                    <div className="col-12 col-md-12 pb-5" style={{ overflowY: "auto", height: "250px" }}>
                       <ul >
-                        {props.item.users.map((item,i)=>{
-                           return <li>
+                        {props.item.users.map((item, i) => {
+                          return <li>
                             <div className="row">
                               <div className="col-4">
                                 <img src={`${process.env.REACT_APP_IPADDRESS}/uploads/` + item._id + "/" + item.profile_img} height={"50px"} width={"50px"} />
                               </div>
                               <div className="col-8 text-center">{item.name}</div>
                             </div>
-                            {i<props.item.users.length-1?<hr />:""}
+                            {i < props.item.users.length - 1 ? <hr /> : ""}
                           </li>
                         })}
-                        </ul>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -204,14 +209,14 @@ function Chat_Header(props) {
               >
                 <i className="ri-phone-line" />
               </a> */}
-                  <span
+              <span
                 onClick={make_Audio_call}
                 className="chat-icon-phone iq-bg-primary"
 
               >
-                 <i className="ri-phone-line" />
+                <i className="ri-phone-line" />
               </span>
-              
+
               {/* <a
                 href="javascript:void();"
                 className="chat-icon-video iq-bg-primary"
@@ -290,7 +295,7 @@ function Chat_Header(props) {
         profile_img = `${process.env.REACT_APP_IPADDRESS}/uploads/avatar.jpg`
       }
       return (
-        <div className="chat-head" style={{fontFamily:Font}}>
+        <div className="chat-head" style={{ fontFamily: Font }}>
           <header className="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3">
             <div className="d-flex align-items-center">
               <div
@@ -309,9 +314,9 @@ function Chat_Header(props) {
                                     <i className="ri-checkbox-blank-circle-fill text-success" />
                                   </span> */}
               </div>
-              <div className="d-flex flex-column" style={{fontFamily:Font}}>
-                <h5 className="mb-0" style={{fontFamily:Font}}>{props.item.name}</h5>
-                {isOnline ? <span className="text-success" style={{fontFamily:Font}}>Online</span> : ""}
+              <div className="d-flex flex-column" style={{ fontFamily: Font }}>
+                <h5 className="mb-0" style={{ fontFamily: Font }}>{props.item.name}</h5>
+                {isOnline ? <span className="text-success" style={{ fontFamily: Font }}>Online</span> : ""}
               </div>
 
             </div>
@@ -332,10 +337,10 @@ function Chat_Header(props) {
                       width={"125px"}
                     />
                   </a>
-                  <div className="user-name mt-4" style={{fontFamily:Font}}>
-                    <h4 style={{fontFamily:Font}}>{props.item.name}</h4>
+                  <div className="user-name mt-4" style={{ fontFamily: Font }}>
+                    <h4 style={{ fontFamily: Font }}>{props.item.name}</h4>
                   </div>
-                  <div className="user-desc" style={{fontFamily:Font}}>
+                  <div className="user-desc" style={{ fontFamily: Font }}>
                     <p >{Country.getCountryByCode(props.item.country)?.name}</p>
                   </div>
                 </div>
@@ -355,7 +360,7 @@ function Chat_Header(props) {
                       Date Of Birth:
                     </div>
                     <div className="col-6 col-md-6 text-right">
-                      {months[new Date(props.item.dob).getMonth()]+" "+new Date(props.item.dob).getDate()+", "+new Date(props.item.dob).getFullYear()}
+                      {months[new Date(props.item.dob).getMonth()] + " " + new Date(props.item.dob).getDate() + ", " + new Date(props.item.dob).getFullYear()}
                     </div>
                   </div>
                   <hr />
@@ -380,12 +385,12 @@ function Chat_Header(props) {
               </div>
             </div>
             <div className="chat-header-icons d-flex">
-            <span
+              <span
                 onClick={make_Audio_call}
                 className="chat-icon-phone iq-bg-primary"
 
               >
-                 <i className="ri-phone-line" />
+                <i className="ri-phone-line" />
               </span>
               {/*------------video Icon-----------  */}
               <span
@@ -456,7 +461,7 @@ function Chat_Header(props) {
   }
   else {
     return (
-      <div className="chat-head" style={{fontFamily:Font}}>
+      <div className="chat-head" style={{ fontFamily: Font }}>
         <header className="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3">
           <div className="d-flex align-items-center">
             <div
@@ -562,11 +567,11 @@ function Chat_Header(props) {
               <i className="ri-vidicon-line" />
             </a> */}
             <span
-                onClick={make_video_call}
-                className="chat-icon-video iq-bg-primary"
-              >
-                <i className="ri-vidicon-line" />
-              </span>
+              onClick={make_video_call}
+              className="chat-icon-video iq-bg-primary"
+            >
+              <i className="ri-vidicon-line" />
+            </span>
             {/* <a
               href="javascript:void();"
               className="chat-icon-delete iq-bg-primary"

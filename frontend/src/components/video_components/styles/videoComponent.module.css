@@ -4,14 +4,29 @@
     background: rgb(1, 4, 48);
 }
 
+
+
 .meetUserVideo {
     position: absolute;
     bottom: 7vh;
-    left: 0.8vw;;
+    left: 0.8vw;
+    ;
     /* height: 35vh; */
     width: 50vh;
     height: auto;
+
     border-radius: 3rem;
+}
+
+@media only screen and (max-width: 480px) {
+    .meetUserVideo {
+        position: absolute;
+        bottom: 7vh;
+        left: 0.8vw;
+        ;
+        height: 40vh;
+        width: 48vh;
+    }
 }
 
 .buttonContainers {
@@ -21,15 +36,16 @@
     bottom: 0;
     text-align: center;
 }
+
 /* ---------------------------------------- */
 .buttonContainers svg {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
 }
 
 /* Media query for medium screens */
 @media only screen and (max-width: 1024px) {
     .buttonContainers svg {
-        font-size: 2.3rem;
+        font-size: 2.4rem;
     }
 }
 
@@ -37,20 +53,20 @@
 @media only screen and (max-width: 768px) {
     .buttonContainers svg {
         /* font-size: 2rem; */
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 }
 
 /* Media query for extra small screens */
 @media only screen and (max-width: 480px) {
     .buttonContainers svg {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }
 
 /* ---------------------------------------- */
 
-.conferenceView { 
+.conferenceView {
     display: flex;
     padding: 50px;
     /* gap: 10px; */
@@ -61,11 +77,20 @@
     gap: 5px;
 }
 
-.conferenceView  video {
+.conferenceView video {
     /* width: 30vw; */
-    height: 50vh;
-    /* min-width: 30vw; */
     /* border-radius: 20px; */
+    height: 50vh;
+    min-width: 30vw;
     border-radius: 1rem;
 }
 
+
+@media only screen and (max-width: 480px) {
+    .conferenceView video {
+        border-radius: 1rem;
+
+        height: 42.5vh;
+        width: 48vh;
+    }
+}

@@ -45,14 +45,21 @@ function SignInPage({ dispatch }) {
         console.log("tried logging in ");
         try {
             set_error_msg('');
-            const response = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/auth/login`, formData);
+            console.log('process.env.REACT_APP_IPADDRESS', process.env.REACT_APP_IPADDRESS)
+            const response = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/auth/login`, {...formData});
+            // const response = await axios.post(`http://192.168.195.110:5000/api/auth/login`, {...formData});
             console.log('response=>', response.data.user_data);
             dispatch(init_user(response.data.user_data));
             localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
             navigate("/");
         } catch (error) {
-            console.log('error -->) :', error.response.data.message);
-            set_error_msg('Error :'+error.response.data.message);
+            console.log('error -->) :', error);
+            // Handle cases where error.response is undefined
+            if (error.response && error.response.data) {
+                set_error_msg('Error: ' + error.response.data.message);
+            } else {
+                set_error_msg('An unexpected error occurred. Please try again later.');
+            }
         }
     };
 
@@ -94,7 +101,7 @@ function SignInPage({ dispatch }) {
                                     {error_msg && <div className="alert alert-danger">{error_msg}</div>}
 
                                     {/* <h3 className="text-danger text-center">{error_msg}</h3> */}
-                                    <p>Enter your email address and password to access admin panel.</p>
+                                    <p>Enter your email address and password to access Conversa account and stay connected.</p>
                                     <form className="mt-4">
                                         <div className="form-group">
                                             <label htmlFor="exampleInputEmail1">Email address</label>

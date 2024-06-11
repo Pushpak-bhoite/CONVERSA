@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Country } from 'country-state-city';
 import axios from 'axios';
+import FormValidate from './formValidation';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -31,53 +32,42 @@ function SignUpPage() {
         }, 200);
     }, []);
 
-    let name, email, password, phone_no, username, gender, dob, type, country, profile_img, cnf_password;
+    // let name, email, password, phone_no, username, gender, dob, type, country, profile_img, cnf_password;
 
     function submit_signup(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const formDataObject = Object.fromEntries(formData.entries());
 
-        const isValid = validateForm(formDataObject);
-        if (!isValid) {
+        // const isValid = validateForm(formDataObject);
+        const errorMessage = FormValidate(formDataObject);
+
+
+        if (errorMessage) {
+            setErrorMessage(errorMessage);
+            setSuccessMessage('')
             return;
+        } else {
+            setErrorMessage('');
+            save_data(formDataObject);
         }
 
-        save_data(formDataObject);
     }
 
-    function validateForm(data) {
-        console.log('profile_img ==>', data.profile_img.name)
-        if (!data.profile_img.name || !data.name || !data.email || !data.gender || !data.dob || !data.country || !data.phone_no ||
-            !data.type || !data.username || !data.password || !data.confirm_password) {
-            setErrorMessage('All fields are required.');
-            return false;
-        }
-
-        if (data.password !== data.confirm_password) {
-            setErrorMessage('Passwords do not match.');
-            return false;
-        }
-
-        setErrorMessage('');
-        return true;
-    }
 
     async function save_data(form_data) {
         try {
-            const result = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/auth/signup`,{...form_data}, {
+            const result = await axios.post(`${process.env.REACT_APP_IPADDRESS}/api/auth/signup`, { ...form_data }, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'ngrok-skip-browser-warning': 'true'
+                    'Content-Type': 'multipart/form-data'
                 }
             });
 
             if (result.status === 200) {
                 setSuccessMessage('Signup successful! Redirecting to login...');
                 setErrorMessage('');
-                
-                setShowModal(true);
 
+                setShowModal(true);
                 setTimeout(() => {
                     navigate("/sign-in");
                 }, 3500); // Redirect after 2 seconds
@@ -103,9 +93,10 @@ function SignUpPage() {
                 {/* loader END */}
                 {/* Sign in Start */}
                 <section className="sign-in-">
-                    <div className="container mt-5 p-0 bg-white">
-                        <div className="row no-gutters " style={{ maxHeight: '90vh', overflow: 'hidden' }}>
-                            <div className="col-sm-6 align-self-center" style={{ maxHeight: '90vh', overflow: 'auto', paddingBottom: '10vh' }}>
+                    <div className="container mt-5 p-0 bg-white" style={{ overflow: 'hidden' }}>
+                        {/* <div className="row no-gutters " style={{ maxHeight: '90vh', overflow: 'hidden' }}> */}
+                        <div className="row no-gutters " style={{ maxHeight: '90vh', overflow: 'auto' }}>
+                            <div className="col-sm-6 align-self-center" style={{ maxHeight: '90vh', overflow: 'auto', paddingBottom: '0vh' }}>
                                 <div className="sign-in-from">
                                     <h1 className="mb-0">Sign Up</h1>
                                     {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
@@ -197,7 +188,8 @@ function SignUpPage() {
                                 </div>
                             </div>
                             <div className="col-sm-6 text-center">
-                                <div className="sign-in-detail text-white">
+                                {/* <div className="sign-in-detail text-white" style={{  maxHeight: '400px' }}> */}
+                                <div className="sign-in-detail text-white" >
                                     <a className="sign-in-logo mb-5" href="#"><img src="images/signUpLogo.png" className="img-fluid" style={{ height: '110px', width: '120px' }} alt="logo" /></a>
                                     <div className="slick-slider11">
                                         <div className="item">
@@ -214,29 +206,29 @@ function SignUpPage() {
             </div>
 
             {/* Success Modal */}
-        {showModal && (
-            <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Success</h5>
-                            <button type="button" className="close" onClick={() => setShowModal(false)}>
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <p>{successMessage}</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" onClick={() => setShowModal(false)}>Close</button>
+            {showModal && (
+                <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Success</h5>
+                                <button type="button" className="close" onClick={() => setShowModal(false)}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <p>{successMessage}</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-success" onClick={() => setShowModal(false)}>Ok</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )}
+            )}
         </div>
     );
-    
+
 }
 
 export default SignUpPage;
